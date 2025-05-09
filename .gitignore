@@ -50,3 +50,4 @@ Desktop.ini
 
 # TypeScript
 *.tsbuildinfo
+**/.claude/settings.local.json
