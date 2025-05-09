@@ -17,6 +17,15 @@ npm run dev
 # Run tests
 npm run test
 
+# Run tests with coverage
+npm run test -- --coverage
+
+# Run specific test file
+npm run test -- path/to/test-file.test.ts
+
+# Run tests in watch mode
+npm run test -- --watch
+
 # Lint code
 npm run lint
 
@@ -40,11 +49,13 @@ Magic Button State is a distributed state management system for TypeScript and R
 5. **Transactions**: Atomic state updates that can be committed or rolled back as a unit.
 6. **Selectors**: Memoized derived state with automatic dependency tracking.
 7. **React Integration**: Custom hooks for accessing state in React components.
+8. **Time-Travel Debugging**: Development tools for inspecting and manipulating state over time.
+9. **Optimistic Updates**: Built-in support for optimistic UI updates with automatic rollback.
 
 ### Key Components
 
 #### Core
-- `state-manager.ts` (`src/core/state-manager.ts`): Core implementation of the state manager with state handling logic.
+- `state-manager.ts` (`src/core/state-manager.ts`): Core implementation of the state manager with state handling logic. Provides the `createStateManager` function which is the main entry point.
 
 #### Hooks
 - `use-atom.ts` (`src/hooks/use-atom.ts`): Hook for accessing and updating individual atoms.
@@ -55,14 +66,23 @@ Magic Button State is a distributed state management system for TypeScript and R
 - `state-provider.tsx` (`src/providers/state-provider.tsx`): React context provider for state manager.
 
 #### Adapters
-- `storage-adapters.ts` (`src/adapters/storage-adapters.ts`): Implementations for different storage strategies.
-- `sync-adapters.ts` (`src/adapters/sync-adapters.ts`): Implementations for different synchronization methods.
+- `storage-adapters.ts` (`src/adapters/storage-adapters.ts`): Implementations for different storage strategies (localStorage, sessionStorage, memory, indexedDB).
+- `sync-adapters.ts` (`src/adapters/sync-adapters.ts`): Implementations for different synchronization methods (broadcastChannel, websocket, sharedWorker).
 
 #### Utilities
 - `state-utils.ts` (`src/utils/state-utils.ts`): Utility functions for state operations.
 
 #### Types
 - `index.ts` (`src/types/index.ts`): TypeScript interfaces and type definitions.
+
+### Testing Architecture
+
+Tests are configured using Jest with the following setup:
+
+- Test files should be named `*.test.ts` or `*.test.tsx`
+- Tests use the JSDOM environment for React component testing
+- Common mocks for BroadcastChannel, IndexedDB, localStorage, and sessionStorage are provided in `jest.setup.js`
+- React Testing Library is used for component testing
 
 ## Implementation Patterns
 
@@ -115,3 +135,24 @@ function Counter() {
   );
 }
 ```
+
+## Available Adapters
+
+### Storage Adapters
+- `'localStorage'`: Persists state to browser's localStorage
+- `'sessionStorage'`: Persists state to browser's sessionStorage
+- `'memory'`: In-memory storage with no persistence
+- `'indexedDB'`: Persists state to IndexedDB database
+
+### Sync Adapters
+- `'broadcastChannel'`: Synchronizes state across browser tabs using the BroadcastChannel API
+- `websocketAdapter(url)`: Synchronizes state via WebSocket connection
+- `'sharedWorker'`: Synchronizes state using a SharedWorker
+
+## Debug Features
+
+When creating a state manager with debug options enabled, you get access to:
+
+- Time-travel debugging through the `debug.getTimeline()` and `debug.travelTo()` APIs
+- State change logging
+- Middleware support for custom processing of state changes
