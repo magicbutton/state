@@ -1,0 +1,80 @@
+{
+  "name": "@magicbutton/state",
+  "version": "0.1.0",
+  "description": "A distributed state management system for TypeScript and React applications",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --target=es2020",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts --target=es2020",
+    "lint": "eslint .",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "zod": "^3.22.4",
+    "uuid": "^9.0.0",
+    "immer": "^10.0.3",
+    "nanoid": "^5.0.4",
+    "broadcast-channel": "^5.3.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts-jest": "^29.1.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicbutton/state.git"
+  },
+  "keywords": [
+    "state-management",
+    "react",
+    "typescript",
+    "distributed",
+    "sync",
+    "atom",
+    "selector",
+    "store",
+    "transaction"
+  ],
+  "author": "Magic Button Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/magicbutton/state/issues"
+  },
+  "homepage": "https://github.com/magicbutton/state#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
